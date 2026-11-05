@@ -1,0 +1,40 @@
+import type { CSSProperties } from 'react';
+const paths: Record<string, React.ReactNode> = {
+  dashboard: <><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></>,
+  settings: <><path d="m9 3-1 3-3 1-2 3 2 2-1 4 3 2 3-1 3 2 3-2 3-1 1-4-2-2 1-4-3-2-3 1-3-2Z"/><circle cx="12" cy="12" r="3"/></>,
+  flag: <><path d="M5 21V3m0 1c5-4 9 4 14 0v10c-5 4-9-4-14 0"/></>,
+  trash: <><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7"/></>,
+  logout: <><path d="M10 3H4v18h6m5-15 6 6-6 6m-8-6h14"/></>,
+  more: <><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></>,
+  close: <path d="m6 6 12 12M6 18 18 6"/>,
+  refresh: <><path d="M20 8a8 8 0 1 0 0 8M20 3v5h-5"/></>,
+  user: <><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></>,
+  lock: <><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4m-4 5v2"/></>,
+  eye: <><path d="M2 12c5-9 15-9 20 0-5 9-15 9-20 0Z"/><circle cx="12" cy="12" r="3"/></>,
+  edit: <><path d="m14 4 6 6M4 20l1-6L17 2l5 5L10 19l-6 1Z"/></>,
+  chevron: <path d="m14 6-6 6 6 6"/>,
+  link: <><path d="m10 14 4-4M8 16l-2 2a4 4 0 0 1-6-6l5-5a4 4 0 0 1 6 0m2 1 2-2a4 4 0 0 1 6 6l-5 5a4 4 0 0 1-6 0"/></>,
+
+  key: <><circle cx="15" cy="8" r="5"/><path d="m11 12-8 8v-5l5-5M5 17l2 2"/></>,
+  home: <><path d="m3 10 9-7 9 7v10H3V10Z"/><path d="M9 20v-7h6v7"/></>,
+  copy: <><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V3H3v13h5"/></>,
+  book: <><path d="M12 5v16M12 5C9 2 5 2 2 4v15c4-2 7-1 10 2 3-3 6-4 10-2V4c-3-2-7-2-10 1Z"/></>,
+  gift: <><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13"/><path d="M12 8C4 8 5 1 8 3c2 0 4 5 4 5Zm0 0c8 0 7-7 4-5-2 0-4 5-4 5Z"/></>,
+  plus: <path d="M12 4v16M4 12h16"/>,
+  arrow: <path d="M20 12H4m6-6-6 6 6 6"/>,
+  external: <><path d="M14 3h7v7m0-7L10 14"/><path d="M10 3H3v18h18v-7"/></>,
+  check: <path d="m4 12 5 5L20 6"/>,
+  search: <><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></>,
+  download: <><path d="M12 3v12m-5-5 5 5 5-5M3 16v5h18v-5"/></>,
+  upload: <><path d="M12 16V3m-5 5 5-5 5 5M3 16v5h18v-5"/></>,
+  info: <><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v1"/></>,
+  clock: <><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></>,
+  share: <><circle cx="18" cy="5" r="3"/><circle cx="5" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8 10 7-4M8 14l7 4"/></>,
+  heart: <path d="M12 21 3 12C-2 6 7-1 12 6c5-7 14 0 9 6l-9 9Z"/>,
+  undo: <><path d="m8 4-5 5 5 5M3 9h11a7 7 0 0 1 0 14"/></>,
+  play: <><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4V8Z"/></>,
+  water: <path d="M12 2C9 7 5 11 5 15a7 7 0 0 0 14 0c0-4-4-8-7-13Z"/>,
+};
+export default function Icon({ name, style }: { name: string; style?: CSSProperties }) {
+  return <svg className="icon" style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name] || paths.info}</svg>;
+}
