@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
     "smoke": "node scripts/check-local.mjs",
-    "preview:html": "node scripts/build-preview.mjs"
+    "preview:html": "node scripts/build-preview.mjs",
+    "preview:admin": "node scripts/build-admin-preview.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.0.0",

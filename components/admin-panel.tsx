@@ -155,7 +155,7 @@ export default function AdminPanel() {
     {!ready ? <div className="adm-loading" role="status"><span className="adm-spinner" /> جاري تجهيز لوحة الإدارة…<div className="adm-skeleton-grid">{[0, 1, 2, 3].map(i => <div key={i} />)}</div></div> : <>
       <section hidden={section !== 'overview'} aria-label="ملخص المبادرة"><div className="adm-stats">{[
         { label: 'أكواد منشورة', value: stats.approved, hint: 'متاحة للمستخدمين', icon: 'key', tone: 'green', filter: 'approved' },
-        { label: 'بانتظار المراجعة', value: stats.pending, hint: stats.pending ? 'تحتاج قرارك' : 'كل الإضافات مراجَعة', icon: 'clock', tone: 'amber', filter: 'pending' },
+        { label: 'بانتظار المراجعة', value: stats.pending, hint: stats.pending ? 'تحتاج قرارك' : 'لا توجد إضافات معلّقة', icon: 'clock', tone: 'amber', filter: 'pending' },
         { label: 'بلاغات مفتوحة', value: reportCount, hint: reportCount ? 'من مستخدمي الموقع' : 'لا توجد بلاغات حاليًا', icon: 'flag', tone: 'orange', filter: null },
         { label: 'إجمالي الأكواد', value: total, hint: 'يشمل كل الحالات', icon: 'dashboard', tone: 'neutral', filter: 'all' },
       ].map(card => <button className={'adm-stat ' + card.tone} key={card.label} onClick={() => card.filter === null ? navigate('reports') : navigate('codes', card.filter)}><span className="adm-stat-top">{card.label}<i><Icon name={card.icon} /></i></span><strong>{number(card.value)}</strong><span className="adm-stat-bottom">{card.hint}<Icon name="arrow" /></span></button>)}</div>

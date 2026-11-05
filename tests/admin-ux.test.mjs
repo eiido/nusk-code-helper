@@ -69,3 +69,26 @@ test('admin workflow keeps settings drafts, confirms deletion, and offers restor
   await act(async()=>root.unmount());dom.window.close();globalThis.window=saved.window;globalThis.document=saved.document;if(saved.navigator)Object.defineProperty(globalThis,'navigator',saved.navigator);else delete globalThis.navigator;globalThis.fetch=saved.fetch;globalThis.requestAnimationFrame=saved.raf;globalThis.IS_REACT_ACT_ENVIRONMENT=saved.act;delete globalThis.__adminFixtureClient;
  }
 });
+
+test('settings preserve unsaved edits when a newer remote revision arrives',async()=>{
+ const {default:SettingsEditor}=await compile('../components/settings-editor.tsx');
+ const dom=new JSDOM('<!doctype html><html><body><div id="root"></div></body></html>',{url:'http://127.0.0.1:3000/admin'});
+ const saved={window:globalThis.window,document:globalThis.document,navigator:Object.getOwnPropertyDescriptor(globalThis,'navigator'),raf:globalThis.requestAnimationFrame,act:globalThis.IS_REACT_ACT_ENVIRONMENT};
+ globalThis.window=dom.window;globalThis.document=dom.window.document;Object.defineProperty(globalThis,'navigator',{value:dom.window.navigator,configurable:true});globalThis.requestAnimationFrame=fn=>{fn(0);return 1;};globalThis.IS_REACT_ACT_ENVIRONMENT=true;
+ const {createRoot}=await import('react-dom/client');const root=createRoot(document.getElementById('root'));
+ const initial=defaultSettings();const props={saving:false,onSave:async()=>{},onReload:()=>{}};
+ try{
+  await act(async()=>root.render(React.createElement(SettingsEditor,{...props,value:initial})));
+  await act(async()=>document.querySelector('.adm-setting-switch input').click());
+  const newer=structuredClone(initial);newer.revision++;newer.content.siteName='اسم محفوظ من جلسة أخرى';
+  await act(async()=>root.render(React.createElement(SettingsEditor,{...props,value:newer})));
+  assert.equal(document.querySelector('.adm-setting-switch input').checked,false);
+  assert.match(document.querySelector('.adm-inline-error').textContent,/جلسة أخرى/);
+  await act(async()=>document.querySelector('.adm-save-actions button[type=button]').click());
+  assert.equal(document.querySelector('.adm-setting-switch input').checked,true);
+  assert.equal(document.querySelector('[data-group=identity] input').value,newer.content.siteName);
+  assert.equal(document.querySelector('.adm-save-actions button[type=submit]').disabled,true);
+ }finally{
+  await act(async()=>root.unmount());dom.window.close();globalThis.window=saved.window;globalThis.document=saved.document;if(saved.navigator)Object.defineProperty(globalThis,'navigator',saved.navigator);else delete globalThis.navigator;globalThis.requestAnimationFrame=saved.raf;globalThis.IS_REACT_ACT_ENVIRONMENT=saved.act;
+ }
+});
