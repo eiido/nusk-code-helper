@@ -42,3 +42,8 @@
 @media(max-width:380px){.adm-stat-top{font-size:9px}.adm-stat-bottom{font-size:8px}.adm-row-date{font-size:9px}}
 .adm-sidebar{overflow-y:auto;scrollbar-width:thin}.adm-live-indicator.error{color:#a36c49}.adm-live-indicator.error i{background:#ba8e59}.adm-codes-panel[aria-busy=true] .adm-code-table{opacity:.55;pointer-events:none}
 @media(max-width:760px){.adm-sidebar{overflow:visible}.adm-row-controls>.adm-icon-button{width:44px;height:44px;min-width:44px}.adm-topbar-actions>.adm-icon-button,.adm-topbar-actions>a{width:42px;height:42px;min-width:42px;min-height:42px}}
+
+.adm-import-toolbar {
+  display: flex;
+  padding: 14px 16px 0;
+}
